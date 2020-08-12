@@ -1,33 +1,37 @@
 @extends('layouts.app')
 @section('content')
     <main role="main" class="text-center">
-{{--        <div class="row text-white p-4 text-left">--}}
-{{--            <?php if ($postData): ?>--}}
-{{--            <div class="col-md-12">--}}
-{{--                <div class="col-md-12" style="background: #333;">--}}
-{{--                    <div class="card flex-md-row mb-4 box-shadow h-md-250 text-white" style="background: #333;">--}}
-{{--                        <div class="card-body d-flex flex-column align-items-start w-50">--}}
-{{--                            <strong class="d-inline-block mb-2 text-primary">Update News</strong>--}}
-{{--                            <div class="mb-1 text-muted"><?= $postData->updated_at ?></div>--}}
-{{--                            <h3 class="mb-0">--}}
-{{--                                <a class="text-white" href="#"><?= $postData->title ?></a>--}}
-{{--                            </h3>--}}
-{{--                            <p class="card-text"><?= $postData->short_description ?></p>--}}
-{{--                            <p class="card-text"><?= $postData->content ?></p>--}}
-{{--                            <!--<a href="#">Continue reading</a>-->--}}
-{{--                        </div>--}}
-{{--                        <div class="p-4 w-50 text-center">--}}
-{{--                            <img class="w-100 card-img-right flex-auto d-none d-md-block" data-src="./img/<?=$postData->image ?>" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="./img/<?=$postData->image ?>" data-holder-rendered="true">--}}
-{{--                            <div class="fb-share-button"--}}
-{{--                                 data-href="./img/<?=$postData->image ?>"--}}
-{{--                                 data-layout="button">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <?php endif;?>--}}
-{{--        </div>--}}
+        <div class="row text-white p-4 text-left">
+            @foreach($posts as $latestPost)
+                @if ($loop->first)
+                    <div class="col-md-12">
+                        <div class="col-md-12" style="background: #333;">
+                            <div class="card flex-md-row mb-4 box-shadow h-md-250 text-white" style="background: #333;">
+                                <div class="card-body d-flex flex-column align-items-start w-50">
+                                    <strong class="d-inline-block mb-2 text-primary">Update News</strong>
+                                    <div class="mb-1 text-muted">{{date('F j, Y', strtotime($latestPost->created_at))}}</div>
+                                    <h3 class="mb-0">
+                                        <a class="text-white" href="#">{{ $latestPost->title }}</a>
+                                    </h3>
+                                    <p class="card-text">{{ $latestPost->short_description }}</p>
+                                    <p class="card-text">{{ $latestPost->content }}</p>
+                                    <!--<a href="#">Continue reading</a>-->
+                                </div>
+                                <div class="p-4 w-50 text-center">
+                                    <img class="w-100 card-img-right flex-auto d-none d-md-block" data-src="./img/<?=$postData->image ?>" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="./img/<?=$postData->image ?>" data-holder-rendered="true">
+                                    <div class="fb-share-button"
+                                         data-href="./img/<?=$postData->image ?>"
+                                         data-layout="button">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    @break
+                @endif
+            @endforeach
+        </div>
         <!--Code chia thành 2 hình lớn width=100-->
         <div class="d-flex flex-row flex-wrap mt-2 mb-2">
             <div class="p-4 w-50">
@@ -152,15 +156,11 @@
             <div class="w-50">
                 <p>Lastest News</p>
                 <div class="cover"></div>
-{{--                <ul class="text-white">--}}
-{{--                    <?php foreach ($posts as $post):?>--}}
-{{--                    <?php--}}
-{{--                    $time = strtotime($post->updated_at);--}}
-{{--                    $post->updated_at = date('F j, Y',$time);--}}
-{{--                    ?>--}}
-{{--                    <li class=""><?= $post->updated_at ?> <br> <?= $post->title ?> </li>--}}
-{{--                    <?php endforeach;?>--}}
-{{--                </ul>--}}
+                <ul class="text-white">
+                    @foreach($posts as $post)
+                    <li class="">{{date('F j, Y', strtotime($post->created_at))}} <br> {{ $post->title }} </li>
+                    @endforeach
+                </ul>
             </div>
             <div class="w-50">
                 <h2>Contact Us</h2>

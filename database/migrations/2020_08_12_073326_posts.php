@@ -21,6 +21,7 @@ class Posts extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->string('title')->unique();
+            $table->string('short_description');
             $table->text('body');
             $table->string('slug')->unique();
             $table->boolean('active');
