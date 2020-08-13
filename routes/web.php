@@ -22,12 +22,13 @@ Route::get('/logout', 'UserController@logout');
 Route::group(['prefix' => 'auth'], function () {
     Auth::routes();
 });
-
 Route::post('upload', 'PostController@upload');
-Route::post('ajaxRequest', 'PostController@upload')->name('ajaxRequest.post');
+
+Route::get('post', 'PostController@index');
 // check for logged in user
 Route::middleware(['auth'])->group(function () {
-    Route::get('post', 'PostController@index');
+    Route::get('/admin/', 'Admin\DashBoardController@index');
+    Route::get('/admin/dashboard', ['as' => 'dashboard', 'uses' => 'Admin\DashBoardController@index@index']);
     // show new post form
     Route::get('new-post', 'PostController@create');
     // save new post

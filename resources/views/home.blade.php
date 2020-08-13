@@ -18,9 +18,9 @@
                                     <!--<a href="#">Continue reading</a>-->
                                 </div>
                                 <div class="p-4 w-50 text-center">
-                                    <img class="w-100 card-img-right flex-auto d-none d-md-block" data-src="./img/<?=$postData->image ?>" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="./img/<?=$postData->image ?>" data-holder-rendered="true">
+                                    <img class="w-100 card-img-right flex-auto d-none d-md-block" data-src="./image/{{ $latestPost->image }}" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="./image/{{ $latestPost->image }}" data-holder-rendered="true">
                                     <div class="fb-share-button"
-                                         data-href="./img/<?=$postData->image ?>"
+                                         data-href="./image/{{ $latestPost->image }}"
                                          data-layout="button">
                                     </div>
                                 </div>
