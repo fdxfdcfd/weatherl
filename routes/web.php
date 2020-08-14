@@ -28,11 +28,11 @@ Route::get('post', 'PostController@index');
 // check for logged in user
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/', 'Admin\DashBoardController@index');
-    Route::get('/admin/dashboard', ['as' => 'dashboard', 'uses' => 'Admin\DashBoardController@index@index']);
-    // show new post form
-    Route::get('new-post', 'PostController@create');
-    // save new post
-    Route::post('new-post', 'PostController@store');
+    Route::get('/admin/dashboard', ['as' => 'dashboard', 'uses' => 'Admin\DashBoardController@index']);
+
+    Route::get('/admin/post', 'Admin\PostController@index');
+    Route::get('/admin/post/create', 'Admin\PostController@create');
+    Route::post('/admin/post/create', 'Admin\PostController@save');
     // edit post form
     Route::get('edit/{slug}', 'PostController@edit');
     // update post
